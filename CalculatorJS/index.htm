@@ -1,0 +1,51 @@
+<html>
+    <head>
+       <link rel="stylesheet" href="style.css">
+       <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+       <title>Calculator{pr0mpT}</title>
+       <link rel = "icon" href =  
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqEpE239vQAAkBQufPbWyL6-KB7u9p3u5Zzg&usqp=CAU"
+        type = "image/x-icon"> 
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="base">
+              <div class="result" id="result">
+                    <div class="history" id="history">
+                        <p id="history-value"></p>
+                    </div>
+                    <div class="output" id="output">
+                        <p id="output-value" class="output-value"></p>
+                    </div>
+              </div>
+              <div class="keyboard" id="keyboard">
+                <button class="operator" id="clear">C</button>
+                <button class="operator" id="backspace">CE</button>
+                <button class="operator" id="%">%</button>
+                <button class="operator" id="/">&#247;</button>
+                <button class="number" id="7">7</button>
+                <button class="number" id="8">8</button>
+                <button class="number" id="9">9</button>
+                <button class="operator" id="*">&times;</button>
+                <button class="number" id="4">4</button>
+                <button class="number" id="5">5</button>
+                <button class="number" id="6">6</button>
+                <button class="operator" id="-">-</button>
+                <button class="number" id="1">1</button>
+                <button class="number" id="2">2</button>
+                <button class="number" id="3">3</button>
+                <button class="operator" id="+">+</button>
+                <button class="empty" id="empty"></button>
+                <button class="number" id="0">0</button>
+                <button class="empty" id="empty"></button>
+                <button class="operator" id="=">=</button>
+
+              </div>  
+            </div>
+        </div>
+        <script>
+function getHistory(){return document.getElementById("history-value").innerHTML}function printHistory(a){document.getElementById("history-value").innerHTML=a}function getOutput(){return document.getElementById("output-value").innerText}function printOutput(a){if(a==""){document.getElementById("output-value").innerText=a}else{document.getElementById("output-value").innerText=getFormattedNumber(a)}}function getFormattedNumber(a){if(a=="-"){return""}var c=Number(a);var b=c.toLocaleString("en-In");return b}function reverseNumberFormat(a){return Number(a.replace(/,/g,""))}var operator=document.getElementsByClassName("operator");for(let i=0;i<operator.length;i++){operator[i].addEventListener("click",function(){if(this.id=="clear"){printHistory("");printOutput("")}else{if(this.id=="backspace"){var output=reverseNumberFormat(getOutput()).toString();if(output){output=output.substr(0,output.length-1);printOutput(output)}}else{var output=getOutput();var history=getHistory();if(output==""&&history!=""){if(isNaN(history[history.length-1])){history=history.substr(0,history.length-1)}}if(output!=""||history!=""){output=output==""?output:reverseNumberFormat(output);history=history+output;if(this.id=="="){var res=eval(history);printOutput(res);printHistory("")}else{history=history+this.id;printHistory(history);printOutput("")}}}}})}var number=document.getElementsByClassName("number");for(var i=0;i<number.length;i++){number[i].addEventListener("click",function(){var a=reverseNumberFormat(getOutput());if(a!=NaN){a=a+this.id;printOutput(a);console.log(a)}})};
+        </script>
+    </body>
+</html>
